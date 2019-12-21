@@ -1,0 +1,110 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+	<meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+	<title></title>
+<style>
+  body {
+  font-family: 'Arial';
+}
+body table td {
+  padding: 10px;
+  background: pink;
+  width: 100px;
+}
+</style>
+</head>
+
+
+<body lang="en-US" dir="ltr">
+<div>Under construction</div>
+<div><a href="https://www.youtube.com/tv#/browse">YouTube</a></div>
+<div>
+<a href="https://www.crackle.com/">Crackle</a></div>
+
+<table id="myTable">
+  <tr id="l01">
+    <td id="l01_1" tabindex="1"><a href="#">one</a>-<a href="#">x</a></td>
+    <td id="l01_2" tabindex="0">two-<a href="#">x</a></td>
+    <td id="l01_3" tabindex="0">three</td>
+  </tr>
+  <tr id="l02">
+    <td id="l02_1" tabindex="0">one -<a href="#">x</a></td>
+    <td id="l02_2" tabindex="0"><a href="#">two</a>-<a href="#">x</td>
+    <td id="l02_3" tabindex="0"><a href="https://www.crackle.com/">Crackle</a></td>
+  </tr>
+  <tr id="l03">
+    <td id="l03_1" tabindex="0">one -<a href="#">x</a></td>
+    <td id="l03_2" tabindex="0"><a href="#">two</a>-<a href="#">x</td>
+    <td id="l03_3" tabindex="0"><a href="#">three</a>-<a href="#">x</td>
+  </tr>
+  <tr id="l04">
+    <td id="l04_1" tabindex="0">one -<a href="#">x</a></td>
+    <td id="l04_2" tabindex="0"><a href="#">two</a>-<a href="#">x</td>
+    <td id="l04_3" tabindex="0"><a href="#">three</a>-<a href="#">x</td>
+  </tr>
+</table>
+
+<script>
+var myTable = document.getElementById('myTable');
+myTable.onkeydown = function(event) {
+  var numberOfCells = document.getElementById('myTable').getElementsByTagName("td").length;
+  if(event.keyCode == 37) {
+    console.log('left');
+    document.getElementById(event.target.id).blur()
+    var currentfocus = event.target.id.split('');
+    currentfocus.splice(currentfocus.length-1, 1, +currentfocus[currentfocus.length - 1]-1);
+    var newfocus = currentfocus.join('');
+    document.getElementById(newfocus).focus()
+  }
+  else if (event.keyCode == 39) {
+    console.log('right');
+    document.getElementById(event.target.id).blur()
+    var currentfocus = event.target.id.split('');
+    currentfocus.splice(currentfocus.length-1, 1, +currentfocus[currentfocus.length - 1]+1);
+    var newfocus = currentfocus.join('');
+    document.getElementById(newfocus).focus()
+  }
+  else if (event.keyCode == 38) {
+    console.log('up');
+    document.getElementById(event.target.id).blur()
+    var currentfocus = event.target.id.split('');
+    currentfocus.splice(2, 1, +currentfocus[2]-1);
+    var newfocus = currentfocus.join('');
+    document.getElementById(newfocus).focus();
+  }
+  else if (event.keyCode == 40) {
+    console.log('down');
+    document.getElementById(event.target.id).blur()
+    var currentfocus = event.target.id.split('');
+    currentfocus.splice(2,1, +currentfocus[2]+1);
+    var newfocus = currentfocus.join('');
+    document.getElementById(newfocus).focus();
+  }
+};
+</script>
+<script>
+var node = findFirstChild(document.getElementById('myTable'), 'TD');
+if (node) {
+    // get the control within the cell
+    node.focus();
+}
+function findFirstChild(parent, tag) {
+    var node, child;
+
+    for (node = parent.firstChild; node; node = node.nextSibling) {
+        if (node.nodeType == 1) { // Element
+            if (node.tagName === tag) {
+                return node;
+            }
+            child = findFirstChild(node, tag);
+            if (child) {
+                return child;
+            }
+        }
+    }
+    return undefined;
+}
+</script>
+</body>
+</html>
