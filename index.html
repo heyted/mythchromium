@@ -2,53 +2,61 @@
 <html>
 <head>
 	<meta http-equiv="content-type" content="text/html; charset=utf-8"/>
-	<title></title>
+	<title>Linux Friendly Streaming Sites</title>
 <style>
-  body {
-  font-family: 'Arial';
+
+body {
+  color: white;
+  background-color: rgba(53, 54, 58);
+  font-family: 'Tahoma';
+  font-size: 44px
 }
 body table td {
   padding: 10px;
-  background: pink;
-  width: 100px;
+  background: rgba(50, 51, 55);
+  width: 500px;
+  font-family: 'Tahoma';
+  font-size: 44px
+}
+a.LN1 {
+  color: white;
+  font-style:normal;
+  font-weight:bold;
+  font-size:1.0em;
+}
+a.LN2:link {
+  color: rgb(232, 234, 237);
+  text-decoration:none;
 }
 </style>
 </head>
 
-
 <body lang="en-US" dir="ltr">
-<div>Under construction</div>
-<div><a href="https://www.youtube.com/tv#/browse">YouTube</a></div>
-<div>
-<a href="https://www.crackle.com/">Crackle</a></div>
-
-<table id="myTable">
+<div><p>Under construction</p></div>
+<table id="mainTable">
   <tr id="l01">
-    <td id="l01_1" tabindex="1"><a href="#">one</a>-<a href="#">x</a></td>
-    <td id="l01_2" tabindex="0">two-<a href="#">x</a></td>
-    <td id="l01_3" tabindex="0">three</td>
+    <td id="l01_1" tabindex="1" style="cursor:pointer" onclick="location.href='https://www.youtube.com/tv#/browse'"><a class="LN2" href="https://www.youtube.com/tv#/browse" target="_top">YouTube</a></td>
+    <td id="l01_2" tabindex="0" style="cursor:pointer" onclick="location.href='https://www.ted.com'"><a class="LN2" href="https://www.ted.com" target="_top">TED Talks</a></td>
   </tr>
   <tr id="l02">
     <td id="l02_1" tabindex="0">one -<a href="#">x</a></td>
-    <td id="l02_2" tabindex="0"><a href="#">two</a>-<a href="#">x</td>
-    <td id="l02_3" tabindex="0"><a href="https://www.crackle.com/">Crackle</a></td>
+    <td id="l02_2" tabindex="0" style="cursor:pointer" onclick="location.href='https://www.crackle.com'"><a class="LN2" href="https://www.crackle.com" target="_top">Crackle</a></td>
   </tr>
   <tr id="l03">
     <td id="l03_1" tabindex="0">one -<a href="#">x</a></td>
     <td id="l03_2" tabindex="0"><a href="#">two</a>-<a href="#">x</td>
-    <td id="l03_3" tabindex="0"><a href="#">three</a>-<a href="#">x</td>
   </tr>
   <tr id="l04">
     <td id="l04_1" tabindex="0">one -<a href="#">x</a></td>
     <td id="l04_2" tabindex="0"><a href="#">two</a>-<a href="#">x</td>
-    <td id="l04_3" tabindex="0"><a href="#">three</a>-<a href="#">x</td>
   </tr>
 </table>
 
 <script>
-var myTable = document.getElementById('myTable');
-myTable.onkeydown = function(event) {
-  var numberOfCells = document.getElementById('myTable').getElementsByTagName("td").length;
+// Change focus using arrow keys:
+var mainTable = document.getElementById('mainTable');
+mainTable.onkeydown = function(event) {
+  var numberOfCells = document.getElementById('mainTable').getElementsByTagName("td").length;
   if(event.keyCode == 37) {
     console.log('left');
     document.getElementById(event.target.id).blur()
@@ -84,7 +92,8 @@ myTable.onkeydown = function(event) {
 };
 </script>
 <script>
-var node = findFirstChild(document.getElementById('myTable'), 'TD');
+// Set initial focus on first cell in table:
+var node = findFirstChild(document.getElementById('mainTable'), 'TD');
 if (node) {
     // get the control within the cell
     node.focus();
@@ -105,6 +114,15 @@ function findFirstChild(parent, tag) {
     }
     return undefined;
 }
+</script>
+<script>
+// Click on currently focused element by pressing enter key:
+document.addEventListener("keyup", function(event) {
+    event.preventDefault();
+    if (event.keyCode === 13) {
+        document.activeElement.click();
+    }
+});
 </script>
 </body>
 </html>
