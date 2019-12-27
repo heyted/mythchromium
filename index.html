@@ -9,14 +9,14 @@ body {
   color: white;
   background-color: rgba(53, 54, 58);
   font-family: 'Tahoma';
-  font-size: 44px
+  font-size: 44px;
 }
 body table td {
   padding: 10px;
   background: rgba(50, 51, 55);
   width: 500px;
   font-family: 'Tahoma';
-  font-size: 44px
+  font-size: 44px;
 }
 a.LN1 {
   color: white;
@@ -25,7 +25,11 @@ a.LN1 {
   font-size:1.0em;
 }
 a.LN2:link {
-  color: rgb(232, 234, 237);
+  color: white;
+  text-decoration:none;
+}
+a.LN3:visited {
+  color: white;
   text-decoration:none;
 }
 </style>
@@ -35,12 +39,12 @@ a.LN2:link {
 <div><p>Under construction</p></div>
 <table id="mainTable">
   <tr id="l01">
-    <td id="l01_1" tabindex="1" style="cursor:pointer" onclick="location.href='https://www.youtube.com/tv#/browse'"><a class="LN2" href="https://www.youtube.com/tv#/browse" target="_top">YouTube</a></td>
-    <td id="l01_2" tabindex="0" style="cursor:pointer" onclick="location.href='https://www.ted.com'"><a class="LN2" href="https://www.ted.com" target="_top">TED Talks</a></td>
+    <td id="l01_1" tabindex="1" style="cursor:pointer" onclick="location.href='https://www.youtube.com/tv#/browse'"><a class="LN2 LN3" href="https://www.youtube.com/tv#/browse" target="_top">YouTube</a></td>
+    <td id="l01_2" tabindex="0" style="cursor:pointer" onclick="location.href='https://www.ted.com'"><a class="LN2 LN3" href="https://www.ted.com" target="_top">TED Talks</a></td>
   </tr>
   <tr id="l02">
     <td id="l02_1" tabindex="0">one -<a href="#">x</a></td>
-    <td id="l02_2" tabindex="0" style="cursor:pointer" onclick="location.href='https://www.crackle.com'"><a class="LN2" href="https://www.crackle.com" target="_top">Crackle</a></td>
+    <td id="l02_2" tabindex="0" style="cursor:pointer" onclick="location.href='https://www.crackle.com'"><a class="LN2 LN3" href="https://www.crackle.com" target="_top">Crackle</a></td>
   </tr>
   <tr id="l03">
     <td id="l03_1" tabindex="0">one -<a href="#">x</a></td>
@@ -55,9 +59,11 @@ a.LN2:link {
 <script>
 // Change focus using arrow keys:
 var mainTable = document.getElementById('mainTable');
+right = 0;
+down = 0;
 mainTable.onkeydown = function(event) {
-  var numberOfCells = document.getElementById('mainTable').getElementsByTagName("td").length;
-  if(event.keyCode == 37) {
+  if(event.keyCode == 37 && right > 0) {
+    right = right - 1;
     console.log('left');
     document.getElementById(event.target.id).blur()
     var currentfocus = event.target.id.split('');
@@ -65,7 +71,8 @@ mainTable.onkeydown = function(event) {
     var newfocus = currentfocus.join('');
     document.getElementById(newfocus).focus()
   }
-  else if (event.keyCode == 39) {
+  else if (event.keyCode == 39 && right < 1) {
+    right = right + 1;
     console.log('right');
     document.getElementById(event.target.id).blur()
     var currentfocus = event.target.id.split('');
@@ -73,7 +80,8 @@ mainTable.onkeydown = function(event) {
     var newfocus = currentfocus.join('');
     document.getElementById(newfocus).focus()
   }
-  else if (event.keyCode == 38) {
+  else if (event.keyCode == 38 && down > 0) {
+    down = down - 1;
     console.log('up');
     document.getElementById(event.target.id).blur()
     var currentfocus = event.target.id.split('');
@@ -81,7 +89,8 @@ mainTable.onkeydown = function(event) {
     var newfocus = currentfocus.join('');
     document.getElementById(newfocus).focus();
   }
-  else if (event.keyCode == 40) {
+  else if (event.keyCode == 40 && down < 3) {
+    down = down + 1;
     console.log('down');
     document.getElementById(event.target.id).blur()
     var currentfocus = event.target.id.split('');
@@ -100,7 +109,6 @@ if (node) {
 }
 function findFirstChild(parent, tag) {
     var node, child;
-
     for (node = parent.firstChild; node; node = node.nextSibling) {
         if (node.nodeType == 1) { // Element
             if (node.tagName === tag) {
